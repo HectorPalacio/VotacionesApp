@@ -170,6 +170,9 @@ class _HomePageState extends State<HomePage> {
       animationDuration: Duration(
         milliseconds: 2000,
       ),
+      chartValuesOptions: ChartValuesOptions(
+        decimalPlaces: 0,
+      ),
     );
   }
 }

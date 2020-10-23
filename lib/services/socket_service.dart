@@ -17,6 +17,10 @@ class SocketService with ChangeNotifier {
 
   void _initConfig() {
     // Dart client
+    // this._socket = IO.io('https://flutter-votaciones-server.herokuapp.com/', {
+    //   'transports': ['websocket'],
+    //   'autoConnect': true
+    // });
     this._socket = IO.io('http://192.168.1.7:3000/', {
       'transports': ['websocket'],
       'autoConnect': true
