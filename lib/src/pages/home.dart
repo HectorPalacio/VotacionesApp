@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          _showGraph(),
+          if (bands.isNotEmpty) _showGraph(),
           Expanded(
             child: ListView.builder(
               itemCount: bands.length,
@@ -165,45 +165,10 @@ class _HomePageState extends State<HomePage> {
       dataMap.putIfAbsent(band.name, () => band.votes.toDouble());
     });
 
-    final List<Color> colorList = [
-      Colors.blue[50],
-      Colors.blue[200],
-      Colors.pink[50],
-      Colors.pink[200],
-      Colors.yellow[200],
-      Colors.yellow[200],
-    ];
-
-    return Container(
-      width: double.infinity,
-      height: 200,
-      child: PieChart(
-        dataMap: dataMap,
-        animationDuration: Duration(milliseconds: 1000),
-        // chartLegendSpacing: 32,
-        // chartRadius: MediaQuery.of(context).size.width / 3.2,
-        chartRadius: MediaQuery.of(context).size.width / 2.5,
-
-        colorList: colorList,
-        initialAngleInDegree: 0,
-        chartType: ChartType.ring,
-        // ringStrokeWidth: 32,
-        legendOptions: LegendOptions(
-          showLegendsInRow: false,
-          //legendPosition: LegendPosition.right,
-          showLegends: true,
-          // legendShape: _BoxShape.circle,
-          legendTextStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        chartValuesOptions: ChartValuesOptions(
-          decimalPlaces: 0,
-          showChartValueBackground: true,
-          showChartValues: true,
-          showChartValuesInPercentage: false,
-          showChartValuesOutside: false,
-        ),
+    return PieChart(
+      dataMap: dataMap,
+      animationDuration: Duration(
+        milliseconds: 2000,
       ),
     );
   }
