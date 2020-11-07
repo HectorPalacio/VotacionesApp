@@ -21,7 +21,7 @@ class SocketService with ChangeNotifier {
     //   'transports': ['websocket'],
     //   'autoConnect': true
     // });
-    this._socket = IO.io('http://192.168.1.7:3000/', {
+    this._socket = IO.io('http://192.168.1.2:3000/', {
       'transports': ['websocket'],
       'autoConnect': true
     });

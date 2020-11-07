@@ -17,9 +17,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    super.initState();
     final socketService = Provider.of<SocketService>(context, listen: false);
     socketService.socket.on('active-bands', _handleActiveBand);
-    super.initState();
   }
 
   _handleActiveBand(dynamic payload) {
@@ -117,42 +117,24 @@ class _HomePageState extends State<HomePage> {
           ),
           actions: [
             MaterialButton(
-                child: Text('Add'),
-                elevation: 5,
-                textColor: Colors.blue,
-                onPressed: () => addBandToList(textController.text))
+              child: Text('Add'),
+              elevation: 5,
+              textColor: Colors.blue,
+              onPressed: () {
+                addBandToList(textController.text);
+                setState(() {});
+              },
+            ),
           ],
         ),
       );
     }
-
-    showCupertinoDialog(
-      context: context,
-      builder: (context) => CupertinoAlertDialog(
-        title: Text('New band name: '),
-        content: CupertinoTextField(
-          controller: textController,
-        ),
-        actions: [
-          CupertinoDialogAction(
-            isDefaultAction: true,
-            child: Text('Add'),
-            onPressed: () => addBandToList(textController.text),
-          ),
-          CupertinoDialogAction(
-            isDestructiveAction: true,
-            child: Text('Dismiss'),
-            onPressed: () => Navigator.pop(context),
-          ),
-        ],
-      ),
-    );
   }
 
-  void addBandToList(String name) {
+  void addBandToList(String name) async {
     if (name.length > 1) {
       final socketService = Provider.of<SocketService>(context, listen: false);
-      socketService.emit('add-band', {'name': name});
+      await socketService.emit('add-band', {'name': name});
     }
 
     Navigator.pop(context);
